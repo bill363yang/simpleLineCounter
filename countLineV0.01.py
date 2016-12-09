@@ -15,6 +15,8 @@ def addLang(nameList):
         langList.append(language(i))
     return langList
 
+def getLineNum(language):
+    return language.totLines
 
 def count(filePath, langList):
     fileQ = []
@@ -35,6 +37,7 @@ def count(filePath, langList):
 
 
 def output(langList):
+    langList = sorted(langList,key = getLineNum,reverse=True)
     countList = ['language', 'total lines', 'blank lines', 'files']
     print('{:<14} {:<14} {:<14} {:<14}'.format(countList[0], countList[1],
                                                countList[2], countList[3]))
@@ -45,9 +48,6 @@ def output(langList):
             total[0] += i.totLines
             total[1] += i.blankLines
             total[2] += i.filenum
-            #print(
-            #   str(i.name) + blank + str(i.totLines) + blank + str(
-            #      i.blankLines) + blank + str(i.filenum))
             line = '{:<14} {:<14} {:<14} {:<14}'.format(
                 i.name, i.totLines, i.blankLines, i.filenum)
             print(line)
